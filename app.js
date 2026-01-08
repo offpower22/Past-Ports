@@ -25,7 +25,7 @@ let currentUser = null;
 // User data management with Firebase
 class UserData {
     constructor() {
-        this.hearts = 5;
+        this.hearts = 3;
         this.streak = 0;
         this.lastLogin = null;
         this.lastCompletionDate = null;
@@ -48,7 +48,7 @@ class UserData {
             this.unsubscribe = onSnapshot(userDocRef, (docSnap) => {
                 if (docSnap.exists()) {
                     const data = docSnap.data();
-                    this.hearts = data.hearts || 5;
+                    this.hearts = data.hearts || 3;
                     this.streak = data.streak || 0;
                     this.lastLogin = data.lastLogin || null;
                     this.lastCompletionDate = data.lastCompletionDate || null;
@@ -84,7 +84,7 @@ class UserData {
         try {
             const userDocRef = doc(db, 'users', userId);
             await setDoc(userDocRef, {
-                hearts: 5,
+                hearts: 3,
                 streak: 0,
                 lastLogin: new Date().toDateString(),
                 lastCompletionDate: null,
@@ -135,7 +135,7 @@ class UserData {
         const data = localStorage.getItem('pastport_user');
         if (data) {
             const parsed = JSON.parse(data);
-            this.hearts = parsed.hearts || 5;
+            this.hearts = parsed.hearts || 3;
             this.streak = parsed.streak || 0;
             this.lastLogin = parsed.lastLogin || null;
             this.lastCompletionDate = parsed.lastCompletionDate || null;
@@ -182,7 +182,7 @@ class UserData {
         if (this.lastLogin !== today) {
             this.lastLogin = today;
             this.completedToday = false;
-            this.hearts = Math.min(this.hearts + 1, 5);
+            this.hearts = Math.min(this.hearts + 1, 3);
 
             if (userId) {
                 await this.saveToFirebase(userId);
@@ -558,7 +558,7 @@ function initHomePage() {
                 await setDoc(userDocRef, {
                     displayName: name,
                     email: email,
-                    hearts: 5,
+                    hearts: 3,
                     streak: 0,
                     lastLogin: new Date().toDateString(),
                     lastCompletionDate: null,
@@ -839,6 +839,11 @@ function initHomePage() {
 
     if (profileButton && profileModal) {
         profileButton.addEventListener('click', () => {
+            // If not logged in, show sign in modal instead
+            if (!currentUser) {
+                document.getElementById('signInModal').classList.remove('hidden');
+                return;
+            }
             profileModal.classList.remove('hidden');
             loadProfileSettings();
         });
