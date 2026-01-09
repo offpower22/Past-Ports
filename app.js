@@ -616,9 +616,15 @@ function initHomePage() {
         if (closeSignIn) {
             closeSignIn.addEventListener('click', () => {
                 signInModal.classList.add('hidden');
-                document.getElementById('accountPromptModal').classList.remove('hidden');
             }, { once: true });
         }
+
+        // Allow clicking outside modal to close
+        signInModal.addEventListener('click', (e) => {
+            if (e.target === signInModal) {
+                signInModal.classList.add('hidden');
+            }
+        }, { once: true });
 
         signInForm.addEventListener('submit', async (e) => {
             e.preventDefault();
