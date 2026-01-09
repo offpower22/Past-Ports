@@ -498,6 +498,24 @@ function initHomePage() {
         }
     });
 
+    // Set up sign-in modal close button permanently
+    const signInModal = document.getElementById('signInModal');
+    const closeSignInBtn = document.getElementById('closeSignIn');
+    if (closeSignInBtn && signInModal) {
+        closeSignInBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            signInModal.classList.add('hidden');
+        });
+
+        // Close on background click
+        signInModal.addEventListener('click', (e) => {
+            if (e.target === signInModal) {
+                signInModal.classList.add('hidden');
+            }
+        });
+    }
+
     function showAccountPrompt(briefingCount) {
         const accountPromptModal = document.getElementById('accountPromptModal');
         const signUpModal = document.getElementById('signUpModal');
@@ -609,22 +627,8 @@ function initHomePage() {
     function showSignInModal(briefingCount) {
         const signInModal = document.getElementById('signInModal');
         const signInForm = document.getElementById('signInForm');
-        const closeSignIn = document.getElementById('closeSignIn');
 
         signInModal.classList.remove('hidden');
-
-        if (closeSignIn) {
-            closeSignIn.addEventListener('click', () => {
-                signInModal.classList.add('hidden');
-            }, { once: true });
-        }
-
-        // Allow clicking outside modal to close
-        signInModal.addEventListener('click', (e) => {
-            if (e.target === signInModal) {
-                signInModal.classList.add('hidden');
-            }
-        }, { once: true });
 
         signInForm.addEventListener('submit', async (e) => {
             e.preventDefault();
