@@ -40,17 +40,13 @@ body {
 .container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 16px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    padding: 16px 16px 48px;
 }
 
 main {
     display: flex;
     gap: 32px;
     align-items: flex-start;
-    flex: 1;
 }
 
 /* Center main content on briefing page */
@@ -705,50 +701,50 @@ header {
 
 /* Footer */
 footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
     text-align: center;
-    padding: 12px 0;
+    padding: 8px 16px;
     color: var(--text-light);
-    font-size: 13px;
+    font-size: 12px;
     border-top: 1px solid var(--border-light);
-    margin-top: 24px;
+    background: var(--bg-parchment);
+    z-index: 50;
 }
 
 .footer-content {
-    max-width: 800px;
-    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
-.footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    margin-bottom: 4px;
+.footer-separator {
+    color: var(--text-muted);
 }
 
 .footer-link {
     color: var(--text-dark);
     text-decoration: none;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    transition: all 0.2s ease;
-    padding: 4px 12px;
-    border-radius: 8px;
+    gap: 4px;
+    transition: color 0.2s ease;
 }
 
 .footer-link:hover {
     color: var(--primary-blue);
-    background: var(--bg-white);
 }
 
 .footer-icon {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .footer-tagline {
-    margin: 2px 0;
     color: var(--text-light);
     font-size: 12px;
     font-style: italic;
@@ -757,7 +753,6 @@ footer {
 .footer-copyright {
     color: var(--text-muted);
     font-size: 11px;
-    margin: 0;
 }
 
 /* Briefing Page Styles */
